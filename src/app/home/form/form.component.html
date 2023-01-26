@@ -1,0 +1,128 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center p-4">
+        <div class="col-md-8 col-lg-8 justify-content-center ">
+            <ng-container *ngIf="!!viewUser && viewUser.length">
+                <mat-card class="card p-5 text-bg-secondary" *ngFor="let user of viewUser">
+                    <mat-card-header>
+                        <mat-card-title-group class="d-flex align-items-center">
+                            <mat-card-title class="h3">{{user.name.title}} {{user.name.first}} {{user.name.last}}</mat-card-title>
+                            <mat-card-subtitle class="h4" *ngIf="user.id.name!=''">{{user.id.name}}</mat-card-subtitle>
+                            <mat-card-subtitle class="h4" *ngIf="user.id.name==''"> - </mat-card-subtitle>
+                            <div class="d-flex p-2">
+                                <img mat-card-xl-image src="{{user.picture.large}}" class="img-fluid img-thumbnail rounded mx-auto d-block">
+                            </div>
+                        </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>
+        
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Username :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{user.login.username}}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Gender :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{user.gender}}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Date of Birthday :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{dataDate(user.dob.date)}}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Age :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{user.dob.age}}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Address :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{user.location.street.name}} {{user.location.street.number}}
+                                    , {{user.location.city}}, {{user.location.state}}, {{user.location.country}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">National :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <img mat-card-sm-image src="{{getNationalFlag(user.nat)}}" alt="">
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Email :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{user.email}}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Phone :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{user.phone}}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 justify-content-center">
+                                <span>
+                                    <p class="h3">Registered :</p>
+                                </span>
+                            </div>
+                            <div class="p-2 justify-content-center">
+                                <p class="h5">{{dataDate(user.registered.date)}}</p>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <div class="d-flex p-2">
+                        <mat-card-actions>
+                            <button 
+                                type="button" 
+                                
+                                (click)="locationBack()"
+                                class="btn btn-outline-dark">
+                                Back
+                            </button>
+                        </mat-card-actions>
+                    </div>
+                </mat-card>
+            </ng-container>
+        </div>
+    </div>
+</div>

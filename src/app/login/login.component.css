@@ -1,0 +1,10 @@
+@import '/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css';
+
+.card{
+    background: lightskyblue;
+    background: -webkit-linear-gradient(right, lightskyblue, teal);
+    background: -moz-linear-gradient(right, lightskyblue, teal);
+    background: -o-linear-gradient(right, lightskyblue, teal);
+    background: linear-gradient(to left, lightskyblue, teal);
+}
+
