@@ -60,7 +60,7 @@ export class TableComponent implements OnInit{
     this.userTbSort.disableClear = true;
     this.dataSourceUsers.sort = this.userTbSort;
     this.dataSourceUsers.sortingDataAccessor = (row: DataUser, columnName : string) : string =>{
-      console.log(row,columnName);
+
       if(columnName=="No") return this.dataSourceUsers.filteredData.indexOf(row).toString();
       if(columnName=="Name") return row.name.first + row.name.last;
       var columnName = row[columnName as keyof DataUser] as string;

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +8,12 @@ export class AuthService {
 
   userLogin : any ;
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   login(data : any, rememberMe : boolean): Promise<any> {
-    // debugger
-    console.log(data);
-    console.log(this.userLogin);
+
     this.userLogin = data;
-    console.log(rememberMe);
+
     return new Promise((resolve) =>{
       if(rememberMe == true){
         const item = {
@@ -33,20 +32,11 @@ export class AuthService {
             id : this.userLogin.login.uuid,
             username : this.userLogin.id.name
           },
-          expiry : now.getTime() + 1*60*1000 //one hour
+          expiry : now.getTime() + 60*60*1000 //one hour
         }
         sessionStorage.setItem('userLogin', JSON.stringify(item));
         localStorage.setItem('userLogin', JSON.stringify(item));
       }
-      // const item = {
-      //   value : {
-      //     id : data.id,
-      //     username : data.login.username,
-      //   },
-      //   expiry : now.getTime() + 5*60*1000
-      // }
-      // console.log(localStorage.getItem('userLogin'));
-
       resolve(true);
     })
   }
@@ -58,20 +48,21 @@ export class AuthService {
     }
 
     const item = JSON.parse(itemStr);
-    console.log(item);
+
     if(!item.expiry){
 
-      console.log(localStorage.getItem('userLogin'))
+
       return !!(localStorage.getItem('userLogin') && sessionStorage.getItem('userLogin'));
     }else{
-      console.log(localStorage.getItem('userLogin'))
+
       const now = new Date();
       if(now.getTime() > item.expiry){
         sessionStorage.removeItem('userLogin')
         localStorage.removeItem('userLogin');
         sessionStorage.clear();
         localStorage.clear();
-        // alert('Network Timeout');
+        // this.router.navigate(['/login']);
+        alert('Network Timeout');
         return false;
       }else{
         return !!(localStorage.getItem('userLogin') && sessionStorage.getItem('userLogin'));

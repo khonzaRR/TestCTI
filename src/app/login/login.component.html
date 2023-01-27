@@ -60,7 +60,9 @@
                                         type="checkbox" >
                                     <label for="rememberMe" style="font-family: monospace;" class="h5 p-3">Remember Me</label>
                                 </div>
-                                <p [hidden]="!wrongPassword" class="text-danger" style="color: red;"> Wrong email or password.</p>
+                                <ng-container *ngIf="wrongPassword">
+                                    <p  class="text-danger" style="color: red;"> Wrong email or password.</p>
+                                </ng-container>
                                 <!-- <label for="chk" aria-hidden="true">Login</label> -->
                                 <button type="submit" class="btn btn-dark">Login</button>
                                 <div class="p-2">

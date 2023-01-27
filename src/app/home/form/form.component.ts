@@ -44,7 +44,7 @@ export class FormComponent implements OnInit{
   getNationalFlag(nat:string): string{
     const link = 'http://purecatamphetamine.github.io/country-flag-icons/3x2/';
     this.nationalFlag = link+nat+'.svg';
-    console.log(this.nationalFlag);
+
     return this.nationalFlag;
   }
 

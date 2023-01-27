@@ -13,13 +13,9 @@ import { faUserCircle} from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit{
 
-  // formLogin : FormGroup;
-  // isFieldInvalid = isFieldInvalid;
+
   usersData : any[] = [];
-  // objSignUp : any ={
-  //   email : '',
-  //   password : ''
-  // };
+
   userLogin ={
     email : '',
     password : '',
@@ -33,11 +29,9 @@ export class LoginComponent implements OnInit{
   wrongPassword : boolean = false;
   isLoading : boolean = false;
   faUserCircle = faUserCircle;
-  // faMailBulk = faMailBulk
-  // password : string;
+
 
   constructor(private auth : AuthService, private router : Router){
-    // console.log(dataUser);
     
   }
   
@@ -62,12 +56,14 @@ export class LoginComponent implements OnInit{
     let password = loginForm.form.value.password;
     if(email.indexOf('@') == -1 ){
       this.isNotValidEmail = true;
+      this.isLoading = false;
       loginForm.form.reset();
     }else{
       this.isNotValidEmail = false;
     }
     if(password.length < 6){
       this.isNotValidPass = true;
+      this.isLoading = false;
       loginForm.form.reset();
     }else{
       this.isNotValidPass = false;
@@ -77,29 +73,26 @@ export class LoginComponent implements OnInit{
   loginApp(loginForm: NgForm){
     // debugger
     this.isLoading = true;
-    // this.formLogin.markAllAsTouched();
+
     this.wrongPassword = false;
-    console.log(loginForm);
+
     if(!loginForm.form.valid){
       return ;
     }
-    
+ 
     if(loginForm.form.valid){
       this.validationEmailAndPassword(loginForm);
-      // this.emailValidation(this.userLogin.email);
-      // this.passwordValidation(this.userLogin.password);
-      // console.log(email);
+      
+      
     }
-    console.log(loginForm.form.value.email);
-    console.log(loginForm.form.value.password);
-    console.log(this.usersData);
+    
     const isUserExist = this.usersData.find(
       data =>
         data.email == loginForm.form.value.email
         && 
         data.login.password == loginForm.form.value.password
     );
-    console.log(isUserExist);
+
     if(isUserExist != undefined){
       this.auth.login(isUserExist, loginForm.form.value.rememberMe).then(() =>{
         timer(10000).subscribe(() =>{
@@ -113,12 +106,5 @@ export class LoginComponent implements OnInit{
       this.isLoading = false;
     }
     
-    // console.log(isUserExist);
   }
-
-  // loginUser(): void{
-  //   this.auth.login().then(() =>{
-  //     this.router.navigate(['/']);
-  //   })
-  // }
 }
